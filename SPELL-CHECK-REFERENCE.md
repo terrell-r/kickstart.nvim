@@ -103,16 +103,6 @@ vim.api.nvim_create_autocmd('FileType', {
 - **Undo mistakes:** If you accidentally add a wrong word, use `zug`
 - **Temporary fixes:** Use `zG` for words you only want accepted in current session
 
-## Integration with CKA Study
-
-When working on CKA study notes:
-1. Enable spell check: `:set spell`
-2. Common Kubernetes terms to add to dictionary (use `zg`):
-   - kubectl, kubeadm, kubelet, etcd
-   - StatefulSet, DaemonSet, ConfigMap
-   - RBAC, CNI, CRI, CSI
-   - And other K8s-specific terminology
-
 ## Related Help
 
 ```vim
