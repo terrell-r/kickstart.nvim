@@ -2,6 +2,7 @@ return {
   'obsidian-nvim/obsidian.nvim',
   version = '*', -- recommended, use latest release instead of latest commit
   lazy = true,
+  enabled = false, -- Disabled in favor of marksman + markdown-tools.nvim
   event = {
     'BufReadPre ' .. vim.fn.expand '~' .. '/obsidian-work/work/*.md',
     'BufNewFile ' .. vim.fn.expand '~' .. '/obsidian-work/work/*.md',
@@ -70,7 +71,7 @@ return {
     vim.api.nvim_create_autocmd('FileType', {
       pattern = 'markdown',
       callback = function()
-        vim.opt_local.conceallevel = 3
+        vim.opt_local.conceallevel = 2
       end,
     }),
 
