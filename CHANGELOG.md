@@ -1,23 +1,33 @@
 # Neovim Configuration Changelog
 
+## [2026-04-07] - Treesitter Parser Fix (Neovim 0.12.1)
+
+### Fixed
+
+#### Treesitter "Invalid field name operator" Error
+- **Symptom**: Opening Lua files triggered highlighter error:
+  ```
+  Query error at 74:3. Invalid field name "operator"
+  ```
+- **Root Cause**: Stale `lua.so` parser in `~/.local/share/nvim/lazy/nvim-treesitter/parser/` (compiled Apr 2) lacked the `operator` field. The system parser (`/usr/lib/libtree-sitter-lua.so`, bundled with Neovim 0.12.1) has the field. The plugin parser loaded first on the runtimepath and took priority.
+- **Resolution**: Removed orphaned `.so` parser files from the old plugin location. The new nvim-treesitter installs parsers to `~/.local/share/nvim/site/parser/` instead.
+
+### Notes
+
+#### Related References
+- kickstart.nvim PR: https://github.com/nvim-lua/kickstart.nvim/pull/1748
+- Config already had correct `main = 'nvim-treesitter.config'` (no init.lua edit needed)
+
+#### Environment
+- **Neovim**: v0.12.1
+- **nvim-treesitter**: commit 4916d659 (new rewritten API)
+- **Plugin manager**: lazy.nvim
+
+---
+
 ## [2025-11-05] - Image Pasting & Documentation Updates
 
 ### Added
-
-#### CKA Study Repository (`/home/terrell/Nextcloud/Notes/training/cka/`)
-- **CLAUDE.md** - Repository guidance for future Claude Code instances
-  - Study resources and timeline (2-week CKA exam prep)
-  - Repository purpose and structure
-  - Guidelines for creating study materials by exam domain
-
-- **CKA-Progress-Tracker.md** - Comprehensive exam preparation tracker
-  - Full table of contents with marksman/markdown-tools compatibility
-  - All 5 CKA exam domains with detailed checklists
-  - 2-week study strategy and daily goals
-  - Mock exam tracking sections (KodeKloud + Killer.sh)
-  - kubectl commands cheat sheet
-  - Exam day preparation checklist
-  - Progress logging tables
 
 #### Neovim Configuration
 - **SPELL-CHECK-REFERENCE.md** - Complete spell checker reference guide
@@ -25,7 +35,6 @@
   - Correction commands (`z=`, `1z=`, etc.)
   - Dictionary management (`zg`, `zw`, etc.)
   - Workflows for quick fixes
-  - CKA-specific Kubernetes terminology tips
 
 ### Fixed
 
